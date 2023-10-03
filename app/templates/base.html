@@ -159,22 +159,19 @@
             }
 
             function calculateCompoundInterest(principal, rate, time, compoundingFrequency) {
-                // Convert annual interest rate from percentage to decimal
-                const r = rate / 100;
+                console.log(principal, rate/100, time)
 
-                // Calculate the factor for compounding
-                const factor = 1 + r / compoundingFrequency;
-
-                // Calculate the total number of compounding periods
-                const n = compoundingFrequency * time;
-
-                // Calculate the future value
-                const amount = principal * Math.pow(factor, n);
-
-                // Calculate the compound interest
-                const compoundInterest = amount - principal;
+                const compoundInterest = principal * Math.pow(1 + (rate / 100), time);
 
                 return compoundInterest.toFixed(2); // Return the compound interest rounded to 2 decimal places
+            }
+
+            function formatCurrency(number, decimalPlaces = 2, currencySymbol = '£') {
+                const fixedNumber = number.toFixed(decimalPlaces);
+                const parts = fixedNumber.split('.');
+                const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                const formattedNumber = `${currencySymbol}${integerPart}${decimalPlaces > 0 ? '.' + parts[1] : ''}`;
+                return formattedNumber;
             }
 
             async function fetchData() {
@@ -183,7 +180,7 @@
                 const income = stripNonNumericalCharsAndParseToInt(document.getElementById('income').value || "0");
                 const salaryIncrease = stripNonNumericalCharsAndParseToInt(document.getElementById('salary-growth').value || "0");
                 const newIncomeInt = calculateCompoundInterest(income, salaryIncrease, year - 2023, 1)
-                const newIncome = stripNonNumericalCharsAndParseToInt(newIncomeInt.toString());
+                const newIncome = newIncomeInt.toString();
 
                 const url = `/predict?inflation=${inflation}&year=${year}&income=${newIncome}`;
 
@@ -194,24 +191,20 @@
                     // Update the HTML elements with the fetched data
                     document
                         .getElementById('expenditureValue')
-                        .innerText = `£${data.food}`;
+                        .innerText = `${formatCurrency(data.total)}`;
                     document
                         .getElementById('expectedIncome')
-                        .innerText = `£${data.entertainment}`;
+                        .innerText = `${newIncome}`;
 
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 }
             }
 
-            // Update data whenever an input field changes
-            const inputFields = document.querySelectorAll('input');
-            inputFields.forEach(input => {
-                input.addEventListener('input', fetchData);
-            });
-
+            const submitButton = document.getElementById('submitinputs');
+            submitButton.addEventListener('click', fetchData);
             // Call fetchData when the page loads to initially populate the data
-            fetchData();
+
         </script>
     </body>
 </html>
