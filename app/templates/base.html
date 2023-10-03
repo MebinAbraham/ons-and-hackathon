@@ -7,39 +7,44 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dela Gothic One">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+        <style>
+            .bg-dark, .btn-dark {
+                background-color: #262633!important;
+            }
+        </style>
     </head>
-    <body>
-        <header class="bg-light p-3 d-inline-flex w-100 align-items-center gap-3 shadow position-fixed">
+    <body class="bg-dark">
+        <header class="bg-dark text-white p-3 d-inline-flex w-100 align-items-center gap-3 shadow position-fixed">
             <img src="{{ url_for('static', path='/budgetBuddy.png') }}" alt="Budget buddy" height="60"/>
             <h1>Budget Buddy</h1>
         </header>
 
-        <main class="pt-5">
-            <section aria-label="Inputs" class="pt-5 pb-4 d-flex flex-wrap gap-3 bg-light w-100 border-bottom">
+        <main class="pt-5 bg-dark">
+            <section aria-label="Inputs" class="pt-5 pb-4 d-flex flex-wrap gap-3 bg-black w-100 text-white" style="--bs-bg-opacity: .5;">
                 <div class="px-5 mt-4 w-100">
                     <div class="row">
                         <div class="col">
                             <label class="d-flex flex-wrap small">
                         Inflation rate (%)
-                    <input type="text" class="border-3 w-100" name="inflation" id="inflation"  style="height: 2.5rem;"/>
+                    <input type="text" class="border-0 rounded w-100 bg-dark" name="inflation" id="inflation"  style="height: 2.5rem;"/>
                             </label>
                         </div>
                         <div  class="col">
                             <label class="d-flex flex-wrap small">
                         Current household income (£)
-                    <input type="text" class="border-3 w-100" name="income" id="income"  style="height: 2.5rem;"/>
+                    <input type="text" class="border-0 rounded w-100 bg-dark" name="income" id="income"  style="height: 2.5rem;"/>
                             </label>
                         </div>
                         <div  class="col">
                             <label class="d-flex flex-wrap small">
                         Salary growth rate (%)
-                    <input type="text" class="border-3 w-100" name="salary-growth" id="salary-growth"  style="height: 2.5rem;"/>
+                    <input type="text" class="border-0 rounded w-100 bg-dark" name="salary-growth" id="salary-growth"  style="height: 2.5rem;"/>
                             </label>
                         </div>
                         <div class="col">
                             <label class="d-flex flex-wrap small">
                         Year
-                    <input type="text" class="border-3 w-100" name="year" id="year" placeholder="2023"  style="height: 2.5rem;"/>
+                    <input type="text" class="border-0 rounded w-100 bg-dark" name="year" id="year" placeholder="2023"  style="height: 2.5rem;"/>
                             </label>
                         </div>
                     </div>
@@ -53,7 +58,7 @@
             <section  aria-label="Filters" class="py-3 px-5 mb-3">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <!--<label class="d-flex flex-wrap flex-column small">
+                        <!-- <label class="d-flex flex-wrap flex-column small">
                         Category
 <select id="expenditureCategories" class="border-3" style="height: 2.5rem;" name="expenditureCategories">
                                 <option value="all">All</option>
@@ -72,24 +77,24 @@
             <section aria-label="Figures">
                 <div class="d-flex w-100 flex-wrap gap-3 flex-row px-5 pe-3">
                     <div class="row gap-5 px-3 mb-3 w-100 d-flex justify-content-between">
-                        <div class="col text-center p-3 bg-light rounded shadow align-items-center">
+                        <div class="col text-center p-3 bg-black rounded shadow align-items-center text-white" style="--bs-bg-opacity: .5;">
                             <h2>Total household expenditure</h2>
                             <p id="expenditureValue" class="display-1">£5,000</p>
                         </div>
-                        <div class="col text-center p-3 bg-light rounded shadow align-items-center">
+                        <div class="col text-center p-3 bg-black rounded shadow align-items-center text-white" style="--bs-bg-opacity: .5;">
                             <h2>Expected household income</h2>
                             <p id="expectedIncome" class="display-1">£50,000</p>
                         </div>
                     </div>
                 </div>
             </section>
-            <section aria-label="visualisations" class="px-5 my-5 py-5">
-                <p>Charts go here lol</p>
+            <section aria-label="visualisations" class="px-5 my-5 py-5 text-white">
+                <p class="display-5">Charts go here lol</p>
             </section>
-            <section aria-label="Table of data" class="px-5 my-5 py-5">
-                <details>
+            <section aria-label="Table of data" class="px-5 my-5 py-5 text-white">
+                <!--<details>
 
-                    <summary>View all data</summary>
+                    <summary>View all data</summary>-->
                     <table>
                         <thead class="lead">
                             <tr>
@@ -128,13 +133,13 @@
                         </tbody>
                     </table>
 
-                </details>
+                <!--</details>-->
 
             </section>
         </main>
 
-        <footer class="bg-light p-5">
-            <p>&copy; 2023 Team Two</p>
+        <footer class="bg-black p-5 text-white" style="--bs-bg-opacity: .5;">
+            <p>&copy; 2023 Team Fidget Spinner</p>
         </footer>
         <!-- Add any additional scripts or JavaScript libraries here -->
 
