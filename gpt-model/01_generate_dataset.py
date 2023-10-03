@@ -6,10 +6,17 @@ import json
 from pathlib import Path
 
 import jsonlines
-from utilities import INPUT_FIELDS, OUTPUT_FIELDS, SYSTEM_MESSAGE
 
 RAW_DATA_PATH = Path("datasets/raw_data.json")
 FORMATTED_DATA_PATH = Path("datasets/formatted_data.jsonl")
+
+INPUT_FIELDS = ["year", "inflation", "income"]
+OUTPUT_FIELDS = ["food", "clothing", "entertainment", "transport"]
+
+SYSTEM_MESSAGE = {
+    "role": "system",
+    "content": "This chatbot calculates expected household expenditure given inflation, year, and household income.",
+}
 
 
 def generate_formatted_data() -> None:
