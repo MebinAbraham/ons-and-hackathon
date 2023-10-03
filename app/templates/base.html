@@ -15,8 +15,8 @@
         </header>
 
         <main class="pt-5">
-            <section aria-label="Inputs" class="py-5 d-flex flex-wrap gap-3 bg-light w-100 border-bottom">
-                <div class="px-5 py-3 mt-4 w-100">
+            <section aria-label="Inputs" class="pt-5 pb-4 d-flex flex-wrap gap-3 bg-light w-100 border-bottom">
+                <div class="px-5 mt-4 w-100">
                     <div class="row">
                         <div class="col">
                             <label class="d-flex flex-wrap small">
@@ -37,16 +37,23 @@
                             </label>
                         </div>
                     </div>
+                    <div class="row pt-3 ms-auto w-100">
+                        <div class="col d-flex justify-content-end">
+                            <button id="submitinputs" class="btn btn-dark rounded-0">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </section>
             <section  aria-label="Filters" class="py-3 px-5 mb-3">
                 <div class="d-flex justify-content-between">
-                    <div>
-
+                    <div class="d-flex align-items-end">
                         <label class="d-flex flex-wrap small">
                         Year
                     <input type="text" class="border-3 w-100" name="year" id="year" placeholder="2023"  style="height: 2.5rem;"/>
                         </label>
+                        <div class="col d-flex justify-content-end">
+                            <button id="updateyear" class="btn btn-dark rounded-0" style="height: 2.5rem;">Submit</button>
+                        </div>
                     </div>
                     <div>
                         <label class="d-flex flex-wrap flex-column small">
@@ -54,11 +61,11 @@
 <select id="expenditureCategories" class="border-3" style="height: 2.5rem;" name="expenditureCategories">
                                 <option value="all">All</option>
                                 <optgroup label="Expense Categories">
-                                    <option value="housing">Housing</option>
-                                    <option value="utilities">Utilities</option>
-                                    <option value="groceries">Groceries</option>
-                                    <option value="transportation">Transportation</option>
                                     <option value="entertainment">Entertainment</option>
+                                    <option value="transport">Transport</option>
+                                    <option value="food">Food</option>
+                                    <option value="clothing">Clothing</option>
+                                    <option value="toiletrolls">Toilet rolls</option>
                                     <!-- Add more categories as needed -->
                                 </optgroup>
                             </select>
@@ -67,8 +74,8 @@
                 </div>
             </section>
             <section aria-label="Figures">
-                <div class="d-flex w-full flex-wrap gap-3 flex-row px-5">
-                    <div class="row gap-5 px-3 mb-3 w-100">
+                <div class="d-flex w-100 flex-wrap gap-3 flex-row px-5 pe-3">
+                    <div class="row gap-5 px-3 mb-3 w-100 d-flex justify-content-between">
                         <div class="col text-center p-3 bg-light rounded shadow align-items-center">
                             <h2>Total household expenditure</h2>
                             <p id="expenditureValue" class="display-1">£5,000</p>
@@ -97,27 +104,27 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <th class="p-3" scope="row">Housing</th>
+                                <th class="p-3" scope="row">Entertainment</th>
                                 <td class="p-3">1000</td>
                                 <td class="p-3">30%</td>
                             </tr>
                             <tr>
-                                <th class="p-3" scope="row">Utilities</th>
+                                <th class="p-3" scope="row">Transport</th>
                                 <td class="p-3">300</td>
                                 <td class="p-3">9%</td>
                             </tr>
                             <tr>
-                                <th class="p-3" scope="row">Groceries</th>
+                                <th class="p-3" scope="row">Food</th>
                                 <td class="p-3">400</td>
                                 <td class="p-3">12%</td>
                             </tr>
                             <tr>
-                                <th class="p-3" scope="row">Transportation</th>
+                                <th class="p-3" scope="row">Clothing</th>
                                 <td class="p-3">200</td>
                                 <td class="p-3">6%</td>
                             </tr>
                             <tr>
-                                <th class="p-3" scope="row">Entertainment</th>
+                                <th class="p-3" scope="row">Toilet rolls</th>
                                 <td class="p-3">150</td>
                                 <td class="p-3">4.5%</td>
                             </tr>
@@ -137,9 +144,15 @@
 
         <script>
             async function fetchData() {
-                const inflation = document.getElementById('inflation').value || 0;
-                const year = document.getElementById('year').value || 2000;
-                const income = document.getElementById('income').value || 0;
+                const inflation = document
+                    .getElementById('inflation')
+                    .value || 0;
+                const year = document
+                    .getElementById('year')
+                    .value || 2000;
+                const income = document
+                    .getElementById('income')
+                    .value || 0;
 
                 const url = `/predict?inflation=${inflation}&year=${year}&income=${income}`;
 
@@ -148,8 +161,12 @@
                     const data = await response.json();
 
                     // Update the HTML elements with the fetched data
-                    document.getElementById('expenditureValue').innerText = `£${data.food}`;
-                    document.getElementById('expectedIncome').innerText = `£${data.entertainment}`;
+                    document
+                        .getElementById('expenditureValue')
+                        .innerText = `£${data.food}`;
+                    document
+                        .getElementById('expectedIncome')
+                        .innerText = `£${data.entertainment}`;
 
                 } catch (error) {
                     console.error('Error fetching data:', error);
