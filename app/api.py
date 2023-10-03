@@ -38,10 +38,14 @@ def predict(*, year: int, inflation: float, income: float) -> dict:
     for _ in range(5):
         try:
             result = format_response(response)
+            logger.info("API call successful")
             result["success"] = True
             return result
         except ValueError:
             logger.error(f"error: Unable to parse response, response={response}")
+
+    logger.info("API call unsuccessful")
+
     return {
         "food": randint(0, 1000),
         "clothing": randint(0, 1000),

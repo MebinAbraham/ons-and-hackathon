@@ -6,6 +6,7 @@ from starlette.requests import Request
 from starlette.responses import HTMLResponse
 from starlette.staticfiles import StaticFiles
 
+from app.api import predict
 from app.templates import templates
 
 app = FastAPI()
@@ -13,14 +14,14 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
-def predict(*, year: int, inflation: float, income: float) -> dict:
-    return {
-        "food": randint(0, 1000),
-        "clothing": randint(0, 1000),
-        "entertainment": randint(0, 1000),
-        "transport": randint(0, 1000),
-        "success": True,
-    }
+# def predict(*, year: int, inflation: float, income: float) -> dict:
+#     return {
+#         "food": randint(0, 1000),
+#         "clothing": randint(0, 1000),
+#         "entertainment": randint(0, 1000),
+#         "transport": randint(0, 1000),
+#         "success": True,
+#     }
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -43,11 +44,14 @@ async def _predict(
         income=income,
     )
 
+    success = data.pop("success")
+
     total = sum(data.values())
     data["total"] = total
     data["year"] = year
     data["inflation"] = inflation
     data["income"] = income
+    data["success"] = success
     return data
 
 
