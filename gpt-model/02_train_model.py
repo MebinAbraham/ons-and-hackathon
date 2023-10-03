@@ -72,12 +72,19 @@ def main():
     Uploads file which generates the file_id
     uses the file_id to create the model
     once that is done, keep using get_fine_tune_id until it is - put it in the env file
-    :return:
+    RUN ONCE PER MODEL TRAINING
     """
     file_id = file_upload(FORMATTED_DATA_PATH)
     create_fine_tune(file_id)
     get_fine_tune_id()
 
 
+def check_model_status():
+    response = openai.FineTuningJob.list()
+    for item in response.get("data", []):
+        print(f'model id={item["id"]}, model status={item["status"]}')
+
+
 if __name__ == "__main__":
-    get_fine_tune(FINE_TUNE_ID)
+    check_model_status()
+    # main()
