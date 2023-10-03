@@ -20,6 +20,7 @@
                 height: 200px;
                 margin: 50px auto;
                 position: relative;
+                display: none;
             }
 
             /* Define the animation */
@@ -115,7 +116,7 @@
                 </div>
             </section>
             <section aria-label="visualisations" class="px-5 my-5 py-5 text-white">
-                <div class="image-rotate">
+                <div class="image-rotate" id="image-rotate">
                     <img src="{{ url_for('static', path='/budgetBuddy.png') }}" alt="Loading" role="status" id="loading" height="60"/>
                 </div>
                 <p class="display-5">Charts go here lol</p>
@@ -216,8 +217,11 @@
                 const url = `/predict?inflation=${inflation}&year=${year}&income=${newIncome}`;
 
                 try {
+                    // edit class and show loading icon
+                    document.getElementById('image-rotate').style.display = "block";
                     const response = await fetch(url);
                     const data = await response.json();
+                    document.getElementById('image-rotate').style.display = null;
 
                     // Update the HTML elements with the fetched data
                     document
@@ -225,7 +229,7 @@
                         .innerText = `${formatCurrency(data.total)}`;
                     document
                         .getElementById('expectedIncome')
-                        .innerText = `${newIncome}`;
+                        .innerText = `${formatCurrency(newIncome)}`;
 
                 } catch (error) {
                     console.error('Error fetching data:', error);
