@@ -136,12 +136,49 @@
         <!-- Add any additional scripts or JavaScript libraries here -->
 
         <script>
-            async function fetchData() {
-                const inflation = document.getElementById('inflation').value || 0;
-                const year = document.getElementById('year').value || 2000;
-                const income = document.getElementById('income').value || 0;
+            function stripNonNumericalCharsAndParseToInt(value) {
+                // Remove non-numeric characters using a regular expression
+                const numericalValue = value.replace(/[^0-9]/g, '');
 
-                const url = `/predict?inflation=${inflation}&year=${year}&income=${income}`;
+                // Parse the numerical value into an integer
+                const parsedInt = parseInt(numericalValue, 10);
+
+                if (isNaN(parsedInt)) {
+                    return 0;
+                }
+
+                return parsedInt;
+            }
+
+            function calculateCompoundInterest(principal, rate, time, compoundingFrequency) {
+                // Convert annual interest rate from percentage to decimal
+                const r = rate / 100;
+
+                // Calculate the factor for compounding
+                const factor = 1 + r / compoundingFrequency;
+
+                // Calculate the total number of compounding periods
+                const n = compoundingFrequency * time;
+
+                // Calculate the future value
+                const amount = principal * Math.pow(factor, n);
+
+                // Calculate the compound interest
+                const compoundInterest = amount - principal;
+
+                return compoundInterest.toFixed(2); // Return the compound interest rounded to 2 decimal places
+            }
+
+
+            async function fetchData() {
+                const inflation = stripNonNumericalCharsAndParseToInt(document.getElementById('inflation').value || "0");
+                const year = stripNonNumericalCharsAndParseToInt(document.getElementById('year').value || "2000");
+                const income = stripNonNumericalCharsAndParseToInt(document.getElementById('income').value || "0");
+                const salaryIncrease = stripNonNumericalCharsAndParseToInt(document.getElementById('salary-growth').value || "0");
+                const newIncomeInt = calculateCompoundInterest(income, salaryIncrease, year - 2023, 1)
+                const newIncome = stripNonNumericalCharsAndParseToInt(newIncomeInt.toString());
+
+                const url = `/predict?inflation=${inflation}&year=${year}&income=${newIncome}`;
 
                 try {
                     const response = await fetch(url);
