@@ -223,6 +223,8 @@
                     const data = await response.json();
                     document.getElementById('image-rotate').style.display = null;
 
+                    console.log(data.success)
+
                     // Update the HTML elements with the fetched data
                     document
                         .getElementById('expenditureValue')
