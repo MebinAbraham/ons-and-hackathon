@@ -1,4 +1,4 @@
-from random import random, randint
+from random import randint, random
 
 import uvicorn
 from fastapi import FastAPI
@@ -19,6 +19,7 @@ def predict(*, year: int, inflation: float, income: float) -> dict:
         "clothing": randint(0, 1000),
         "entertainment": randint(0, 1000),
         "transport": randint(0, 1000),
+        "success": True,
     }
 
 
@@ -29,7 +30,9 @@ async def root(request: Request):
 
 
 @app.get("/predict")
-async def _predict(request: Request, year: int, inflation: float, income: float) -> dict:
+async def _predict(
+    request: Request, year: int, inflation: float, income: float
+) -> dict:
     year = year or 2000
     inflation = inflation or 0
     income = income or 0

@@ -17,5 +17,5 @@ def format_response(response: str) -> dict:
     """
     return {
         key: float(value)
-        for key, value in (item.split(": ") for item in response.split(", "))
+        for key, value in (item.split(": ") for item in response.split("; "))
     }

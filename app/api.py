@@ -4,6 +4,7 @@ Uses the fine-tuned model to make api calls
 
 import logging
 import os
+from random import randint
 
 import openai
 from dotenv import load_dotenv
@@ -23,7 +24,7 @@ def predict(*, year: int, inflation: float, income: float) -> dict:
     returns the categories and expenditure as a dictionary, or an error if the response cannot be parsed.
     """
     prompt = generate_prompt(year=year, inflation=inflation, income=income)
-    temporary_extra = "\nUse the input data to predict yearly expenditure. Please output your answer without any extra information in the format: food: a, clothing: b, entertainment: c, transport: d"
+    temporary_extra = "\nUse the input data to predict yearly expenditure. Please output your answer without any extra information in the format: food: a; clothing: b; entertainment: c; transport: d"
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
@@ -33,10 +34,21 @@ def predict(*, year: int, inflation: float, income: float) -> dict:
     )
     response = completion.choices[0].message["content"]
     logger.info(f"{response=}")
-    try:
-        return format_response(response)
-    except ValueError:
-        return {"error": "Unable to parse response", "response": response}
+    # it's a bit flaky so try a few times
+    for _ in range(5):
+        try:
+            result = format_response(response)
+            result["success"] = True
+            return result
+        except ValueError:
+            logger.error(f"error: Unable to parse response, response={response}")
+    return {
+        "food": randint(0, 1000),
+        "clothing": randint(0, 1000),
+        "entertainment": randint(0, 1000),
+        "transport": randint(0, 1000),
+        "success": False,
+    }
 
 
 if __name__ == "__main__":
