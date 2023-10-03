@@ -36,6 +36,12 @@
                     <input type="text" class="border-3 w-100" name="salary-growth" id="salary-growth"  style="height: 2.5rem;"/>
                             </label>
                         </div>
+                        <div class="col">
+                            <label class="d-flex flex-wrap small">
+                        Year
+                    <input type="text" class="border-3 w-100" name="year" id="year" placeholder="2023"  style="height: 2.5rem;"/>
+                            </label>
+                        </div>
                     </div>
                     <div class="row pt-3 ms-auto w-100">
                         <div class="col d-flex justify-content-end">
@@ -46,17 +52,8 @@
             </section>
             <section  aria-label="Filters" class="py-3 px-5 mb-3">
                 <div class="d-flex justify-content-between">
-                    <div class="d-flex align-items-end">
-                        <label class="d-flex flex-wrap small">
-                        Year
-                    <input type="text" class="border-3 w-100" name="year" id="year" placeholder="2023"  style="height: 2.5rem;"/>
-                        </label>
-                        <div class="col d-flex justify-content-end">
-                            <button id="updateyear" class="btn btn-dark rounded-0" style="height: 2.5rem;">Submit</button>
-                        </div>
-                    </div>
                     <div>
-                        <label class="d-flex flex-wrap flex-column small">
+                        <!--<label class="d-flex flex-wrap flex-column small">
                         Category
 <select id="expenditureCategories" class="border-3" style="height: 2.5rem;" name="expenditureCategories">
                                 <option value="all">All</option>
@@ -66,10 +63,9 @@
                                     <option value="food">Food</option>
                                     <option value="clothing">Clothing</option>
                                     <option value="toiletrolls">Toilet rolls</option>
-                                    <!-- Add more categories as needed -->
                                 </optgroup>
                             </select>
-                        </label>
+                        </label>-->
                     </div>
                 </div>
             </section>
@@ -175,7 +171,6 @@
 
                 return compoundInterest.toFixed(2); // Return the compound interest rounded to 2 decimal places
             }
-
 
             async function fetchData() {
                 const inflation = stripNonNumericalCharsAndParseToInt(document.getElementById('inflation').value || "0");
