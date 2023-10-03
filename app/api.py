@@ -11,23 +11,24 @@ from dotenv import load_dotenv
 from utilities import SYSTEM_MESSAGE, format_response, generate_prompt
 
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 FINE_TUNE_ID = os.getenv("FINE_TUNE_ID")
 logger = logging.getLogger("Hackathon")
+openai.api_key = OPENAI_API_KEY
 
 
-def predict(year: int, inflation: float, income: float) -> dict:
+def predict(*, year: int, inflation: float, income: float) -> dict:
     """
     Uses the year, inflation and income to format a prompt to send to the fine-tuned model
     returns the categories and expenditure as a dictionary, or an error if the response cannot be parsed.
     """
     prompt = generate_prompt(year=year, inflation=inflation, income=income)
-    temporary_extra = "Please output your answer without any extra information in the format: food: 100, clothing: 100, entertainment: 100, transport: 100"
+    temporary_extra = "\nUse the input data to predict yearly expenditure. Please output your answer without any extra information in the format: food: a, clothing: b, entertainment: c, transport: d"
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
             SYSTEM_MESSAGE,
-            {"role": "user", "content": prompt + "\n" + temporary_extra},
+            {"role": "user", "content": prompt + temporary_extra},
         ],
     )
     response = completion.choices[0].message["content"]
@@ -40,4 +41,4 @@ def predict(year: int, inflation: float, income: float) -> dict:
 
 
 if __name__ == "__main__":
-    print(predict(2020, 0.02, 1000))
+    print(predict(year=2020, inflation=0.02, income=1000))

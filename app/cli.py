@@ -2,10 +2,12 @@ import argparse
 
 from _decimal import Decimal
 
+from api import predict
+
 
 def calculate_future_income(income, inflation, year):
     """Implement this"""
-    return 0
+    return income
 
 
 def main():
@@ -33,6 +35,10 @@ def main():
     print(
         f"Projected income after {args.year} years: ${future_income:.2f} with {args.inflation}% inflation and {args.salary_increase}% salary increase"
     )
+    expenditure = predict(
+        income=future_income, inflation=args.inflation, year=args.year
+    )
+    print(f"Projected expenditure: {expenditure}")
 
 
 if __name__ == "__main__":
