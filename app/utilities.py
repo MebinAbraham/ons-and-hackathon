@@ -16,5 +16,6 @@ def format_response(response: str) -> dict:
     Takes the response from the api call and formats it into a dictionary
     """
     return {
-        key: float(value) for key, value in zip(OUTPUT_FIELDS, response.split(", "))
+        key: float(value)
+        for key, value in (item.split(": ") for item in response.split(", "))
     }
