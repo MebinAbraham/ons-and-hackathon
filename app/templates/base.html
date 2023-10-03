@@ -1,9 +1,169 @@
-<html>
-<head>
-    <title>Test</title>
-    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
-</head>
-<body>
-<h1>Test</h1>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Budget Buddy</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dela Gothic One">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+    </head>
+    <body>
+        <header class="bg-light p-3 d-inline-flex w-100 align-items-center gap-3 shadow position-fixed">
+            <img src="{{ url_for('static', path='/budgetBuddy.png') }}" alt="Budget buddy" height="60"/>
+            <h1>Budget Buddy</h1>
+        </header>
+
+        <main class="pt-5">
+            <section aria-label="Inputs" class="py-5 d-flex flex-wrap gap-3 bg-light w-100 border-bottom">
+                <div class="px-5 py-3 mt-4 w-100">
+                    <div class="row">
+                        <div class="col">
+                            <label class="d-flex flex-wrap small">
+                        Inflation rate (%)
+                    <input type="text" class="border-3 w-100" name="inflation" id="inflation"  style="height: 2.5rem;"/>
+                            </label>
+                        </div>
+                        <div  class="col">
+                            <label class="d-flex flex-wrap small">
+                        Current household income (£)
+                    <input type="text" class="border-3 w-100" name="income" id="income"  style="height: 2.5rem;"/>
+                            </label>
+                        </div>
+                        <div  class="col">
+                            <label class="d-flex flex-wrap small">
+                        Salary growth rate (%)
+                    <input type="text" class="border-3 w-100" name="salary-growth" id="salary-growth"  style="height: 2.5rem;"/>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section  aria-label="Filters" class="py-3 px-5 mb-3">
+                <div class="d-flex justify-content-between">
+                    <div>
+
+                        <label class="d-flex flex-wrap small">
+                        Year
+                    <input type="text" class="border-3 w-100" name="year" id="year" placeholder="2023"  style="height: 2.5rem;"/>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="d-flex flex-wrap flex-column small">
+                        Category
+<select id="expenditureCategories" class="border-3" style="height: 2.5rem;" name="expenditureCategories">
+                                <option value="all">All</option>
+                                <optgroup label="Expense Categories">
+                                    <option value="housing">Housing</option>
+                                    <option value="utilities">Utilities</option>
+                                    <option value="groceries">Groceries</option>
+                                    <option value="transportation">Transportation</option>
+                                    <option value="entertainment">Entertainment</option>
+                                    <!-- Add more categories as needed -->
+                                </optgroup>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section aria-label="Figures">
+                <div class="d-flex w-full flex-wrap gap-3 flex-row px-5">
+                    <div class="row gap-5 px-3 mb-3 w-100">
+                        <div class="col text-center p-3 bg-light rounded shadow align-items-center">
+                            <h2>Total household expenditure</h2>
+                            <p id="expenditureValue" class="display-1">£5,000</p>
+                        </div>
+                        <div class="col text-center p-3 bg-light rounded shadow align-items-center">
+                            <h2>Expected household income</h2>
+                            <p id="expectedIncome" class="display-1">£50,000</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section aria-label="visualisations" class="px-5 my-5 py-5">
+                <p>Charts go here lol</p>
+            </section>
+            <section aria-label="Table of data" class="px-5 my-5 py-5">
+                <details>
+
+                    <summary>View all data</summary>
+                    <table>
+                        <thead class="lead">
+                            <tr>
+                                <th class="p-3">Category</th>
+                                <th class="p-3">Expenditure (£)</th>
+                                <th class="p-3">Percentage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="p-3" scope="row">Housing</th>
+                                <td class="p-3">1000</td>
+                                <td class="p-3">30%</td>
+                            </tr>
+                            <tr>
+                                <th class="p-3" scope="row">Utilities</th>
+                                <td class="p-3">300</td>
+                                <td class="p-3">9%</td>
+                            </tr>
+                            <tr>
+                                <th class="p-3" scope="row">Groceries</th>
+                                <td class="p-3">400</td>
+                                <td class="p-3">12%</td>
+                            </tr>
+                            <tr>
+                                <th class="p-3" scope="row">Transportation</th>
+                                <td class="p-3">200</td>
+                                <td class="p-3">6%</td>
+                            </tr>
+                            <tr>
+                                <th class="p-3" scope="row">Entertainment</th>
+                                <td class="p-3">150</td>
+                                <td class="p-3">4.5%</td>
+                            </tr>
+                            <!-- Add more rows for additional categories and data -->
+                        </tbody>
+                    </table>
+
+                </details>
+
+            </section>
+        </main>
+
+        <footer class="bg-light p-5">
+            <p>&copy; 2023 Team Two</p>
+        </footer>
+        <!-- Add any additional scripts or JavaScript libraries here -->
+
+        <script>
+            async function fetchData() {
+                const inflation = document.getElementById('inflation').value || 0;
+                const year = document.getElementById('year').value || 2000;
+                const income = document.getElementById('income').value || 0;
+
+                const url = `/predict?inflation=${inflation}&year=${year}&income=${income}`;
+
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+
+                    // Update the HTML elements with the fetched data
+                    document.getElementById('expenditureValue').innerText = `£${data.food}`;
+                    document.getElementById('expectedIncome').innerText = `£${data.entertainment}`;
+
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            }
+
+            // Update data whenever an input field changes
+            const inputFields = document.querySelectorAll('input');
+            inputFields.forEach(input => {
+                input.addEventListener('input', fetchData);
+            });
+
+            // Call fetchData when the page loads to initially populate the data
+            fetchData();
+        </script>
+    </body>
 </html>
