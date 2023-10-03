@@ -9,7 +9,7 @@ import coloredlogs
 
 log_level = logging.INFO
 
-logger = logging.getLogger("backend")
+logger = logging.getLogger("app")
 logger.setLevel(log_level)
 format_string = "%(asctime)s | %(name)s | %(levelname)s | %(message)s"
 

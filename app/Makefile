@@ -1,4 +1,4 @@
-PROJECT_FOLDER="backend"
+PROJECT_FOLDER="app"
 
 lint: autoflake isort format mypy pylint flake8 pytype
 
