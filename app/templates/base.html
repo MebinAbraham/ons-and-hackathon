@@ -125,42 +125,43 @@
                 <!--<details>
 
                     <summary>View all data</summary>-->
-                <table>
+                <table id="expenditureTable">
                     <thead class="lead">
                         <tr>
                             <th class="p-3">Category</th>
                             <th class="p-3">Expenditure (£)</th>
-                            <th class="p-3">Percentage</th>
+                            <th class="p-3">Percentage (%)</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th class="p-3" scope="row">Entertainment</th>
-                            <td class="p-3">1000</td>
-                            <td class="p-3">30%</td>
-                        </tr>
-                        <tr>
-                            <th class="p-3" scope="row">Transport</th>
-                            <td class="p-3">300</td>
-                            <td class="p-3">9%</td>
-                        </tr>
-                        <tr>
-                            <th class="p-3" scope="row">Food</th>
-                            <td class="p-3">400</td>
-                            <td class="p-3">12%</td>
-                        </tr>
-                        <tr>
-                            <th class="p-3" scope="row">Clothing</th>
-                            <td class="p-3">200</td>
-                            <td class="p-3">6%</td>
-                        </tr>
-                        <tr>
-                            <th class="p-3" scope="row">Toilet rolls</th>
-                            <td class="p-3">150</td>
-                            <td class="p-3">4.5%</td>
-                        </tr>
-                        <!-- Add more rows for additional categories and data -->
-                    </tbody>
+                    <tbody ></tbody>
+<!--                    <tbody>-->
+<!--                        <tr>-->
+<!--                            <th class="p-3" scope="row">Entertainment</th>-->
+<!--                            <td class="p-3">1000</td>-->
+<!--                            <td class="p-3">30%</td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th class="p-3" scope="row">Transport</th>-->
+<!--                            <td class="p-3">300</td>-->
+<!--                            <td class="p-3">9%</td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th class="p-3" scope="row">Food</th>-->
+<!--                            <td class="p-3">400</td>-->
+<!--                            <td class="p-3">12%</td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th class="p-3" scope="row">Clothing</th>-->
+<!--                            <td class="p-3">200</td>-->
+<!--                            <td class="p-3">6%</td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th class="p-3" scope="row">Toilet rolls</th>-->
+<!--                            <td class="p-3">150</td>-->
+<!--                            <td class="p-3">4.5%</td>-->
+<!--                        </tr>-->
+<!--                        &lt;!&ndash; Add more rows for additional categories and data &ndash;&gt;-->
+<!--                    </tbody>-->
                 </table>
 
                 <!--</details>-->
@@ -174,6 +175,9 @@
         <!-- Add any additional scripts or JavaScript libraries here -->
 
         <script>
+            function capitalizeFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
             function stripNonNumericalCharsAndParseToInt(value) {
                 // Remove non-numeric characters using a regular expression
                 const numericalValue = value.replace(/[^0-9]/g, '');
@@ -206,6 +210,33 @@
                 return formattedNumber;
             }
 
+            // Function to update the table
+            function updateTable(data) {
+                const tableBody = document.querySelector('#expenditureTable tbody');
+
+                // Clear existing rows
+                tableBody.innerHTML = '';
+                console.log(data)
+
+                // Iterate over the JSON data and populate the table\
+                total = data.total
+                for (const cat of ["food", "clothing", "entertainment", "transport"]) {
+                    const expenditure = data[cat];
+                    const percentage = (expenditure / total * 100).toFixed(2) + "%";
+
+                    const row = `
+                            <tr>
+                              <th class="p-3" scope="row">${capitalizeFirstLetter(cat)}</th>
+                              <td class="p-3">${formatCurrency(expenditure)}</td>
+                              <td class="p-3">${percentage}</td>
+                            </tr>
+                          `;
+
+                    tableBody.insertAdjacentHTML('beforeend', row);
+                }
+                }
+
+
             async function fetchData() {
                 const inflation = stripNonNumericalCharsAndParseToInt(document.getElementById('inflation').value || "0");
                 const year = stripNonNumericalCharsAndParseToInt(document.getElementById('year').value || "2000");
@@ -228,10 +259,14 @@
                     // Update the HTML elements with the fetched data
                     document
                         .getElementById('expenditureValue')
-                        .innerText = `£${data.total}`;
+                        .innerText = `${formatCurrency(parseInt(data.total))}`;
                     document
                         .getElementById('expectedIncome')
-                        .innerText = `£${newIncome}`;
+                        .innerText = `${formatCurrency(parseInt(newIncome))}`;
+
+
+                    updateTable(data)
+
 
                 } catch (error) {
                     console.error('Error fetching data:', error);
