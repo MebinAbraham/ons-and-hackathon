@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = ""
+authors = ["Mebin Abraham <mebin95+work@gmail.com>"]
+packages = [
+    { include = "backend"},
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+coloredlogs = "^14.0"
+
+[tool.poetry.dev-dependencies]
+black = "^20.8b1"
+pylint = "^2.6.0"
+pylint-quotes = "~0"
+mypy = "~0"
+isort = "^5.6.4"
+pytype = "^2021.3.22"
+flake8 = "^3.9.2"
+flake8-datetimez = "^20.10.0"
+autoflake = "^1.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
