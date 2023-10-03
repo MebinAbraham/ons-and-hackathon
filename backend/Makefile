@@ -14,14 +14,11 @@ flake8:
 autoflake:
 	poetry run autoflake -r . --in-place --remove-all-unused-imports
 
-mypy:
-	poetry run mypy "./$(PROJECT_FOLDER)"
-
-pytype:
-	poetry run pytype --keep-going --jobs auto "./$(PROJECT_FOLDER)"
-
 format:
 	poetry run black --exclude "\.pytype" .
 
 build:
 	poetry update
+
+run:
+	poetry run uvicorn main:app --host 0.0.0.0 --port 8000 --reload

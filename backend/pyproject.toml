@@ -8,14 +8,14 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.12"
+python = ">=3.9,<3.10"
 coloredlogs = "^14.0"
+fastapi = "^0.103.2"
+uvicorn = "^0.23.2"
 
 [tool.poetry.dev-dependencies]
-black = "^20.8b1"
 pylint = "^2.6.0"
 pylint-quotes = "~0"
-mypy = "~0"
 isort = "^5.6.4"
 pytype = "^2021.3.22"
 flake8 = "^3.9.2"
