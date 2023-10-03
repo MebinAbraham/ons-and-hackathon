@@ -33,7 +33,7 @@ def main():
 
     future_income = calculate_future_income(income, args.inflation, args.year)
     print(
-        f"Projected income after {args.year} years: ${future_income:.2f} with {args.inflation}% inflation and {args.salary_increase}% salary increase"
+        f"Querying for the year: {args.year}, with an income of: ${future_income:.2f} with inflation of {args.inflation}%"
     )
     expenditure = predict(
         income=future_income, inflation=args.inflation, year=args.year

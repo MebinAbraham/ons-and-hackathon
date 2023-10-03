@@ -32,12 +32,11 @@ def predict(*, year: int, inflation: float, income: float) -> dict:
         ],
     )
     response = completion.choices[0].message["content"]
-    print(response)
     logger.info(f"{response=}")
     try:
         return format_response(response)
     except ValueError:
-        return {"error": "Unable to parse response"}
+        return {"error": "Unable to parse response", "response": response}
 
 
 if __name__ == "__main__":
