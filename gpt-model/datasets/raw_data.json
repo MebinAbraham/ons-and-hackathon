@@ -1,0 +1,209 @@
+[
+  {
+    "year": 1999,
+    "inflation": 1.6,
+    "income": 10000,
+    "food": 1000,
+    "transport": 2000,
+    "entertainment": 3000,
+    "clothing": 4000
+  },
+  {
+    "year": 2000,
+    "inflation": 2.2,
+    "income": 10500,
+    "food": 1100,
+    "transport": 2100,
+    "entertainment": 3100,
+    "clothing": 4100
+  },
+  {
+    "year": 2001,
+    "inflation": 1.8,
+    "income": 11000,
+    "food": 1200,
+    "transport": 2200,
+    "entertainment": 3200,
+    "clothing": 4200
+  },
+  {
+    "year": 2002,
+    "inflation": 2.5,
+    "income": 11500,
+    "food": 1300,
+    "transport": 2300,
+    "entertainment": 3300,
+    "clothing": 4300
+  },
+  {
+    "year": 2003,
+    "inflation": 2.0,
+    "income": 12000,
+    "food": 1400,
+    "transport": 2400,
+    "entertainment": 3400,
+    "clothing": 4400
+  },
+  {
+    "year": 2004,
+    "inflation": 2.2,
+    "income": 12500,
+    "food": 1500,
+    "transport": 2500,
+    "entertainment": 3500,
+    "clothing": 4500
+  },
+  {
+    "year": 2005,
+    "inflation": 2.8,
+    "income": 13000,
+    "food": 1600,
+    "transport": 2600,
+    "entertainment": 3600,
+    "clothing": 4600
+  },
+  {
+    "year": 2006,
+    "inflation": 3.0,
+    "income": 13500,
+    "food": 1700,
+    "transport": 2700,
+    "entertainment": 3700,
+    "clothing": 4700
+  },
+  {
+    "year": 2007,
+    "inflation": 2.5,
+    "income": 14000,
+    "food": 1800,
+    "transport": 2800,
+    "entertainment": 3800,
+    "clothing": 4800
+  },
+  {
+    "year": 2008,
+    "inflation": 4.0,
+    "income": 14500,
+    "food": 1900,
+    "transport": 2900,
+    "entertainment": 3900,
+    "clothing": 4900
+  },
+  {
+    "year": 2009,
+    "inflation": 1.2,
+    "income": 15000,
+    "food": 2000,
+    "transport": 3000,
+    "entertainment": 4000,
+    "clothing": 5000
+  },
+  {
+    "year": 2010,
+    "inflation": 1.5,
+    "income": 15500,
+    "food": 2100,
+    "transport": 3100,
+    "entertainment": 4100,
+    "clothing": 5100
+  },
+  {
+    "year": 2011,
+    "inflation": 2.0,
+    "income": 16000,
+    "food": 2200,
+    "transport": 3200,
+    "entertainment": 4200,
+    "clothing": 5200
+  },
+  {
+    "year": 2012,
+    "inflation": 1.8,
+    "income": 16500,
+    "food": 2300,
+    "transport": 3300,
+    "entertainment": 4300,
+    "clothing": 5300
+  },
+  {
+    "year": 2013,
+    "inflation": 1.5,
+    "income": 17000,
+    "food": 2400,
+    "transport": 3400,
+    "entertainment": 4400,
+    "clothing": 5400
+  },
+  {
+    "year": 2014,
+    "inflation": 1.2,
+    "income": 17500,
+    "food": 2500,
+    "transport": 3500,
+    "entertainment": 4500,
+    "clothing": 5500
+  },
+  {
+    "year": 2015,
+    "inflation": 1.3,
+    "income": 18000,
+    "food": 2600,
+    "transport": 3600,
+    "entertainment": 4600,
+    "clothing": 5600
+  },
+  {
+    "year": 2016,
+    "inflation": 2.2,
+    "income": 18500,
+    "food": 2700,
+    "transport": 3700,
+    "entertainment": 4700,
+    "clothing": 5700
+  },
+  {
+    "year": 2017,
+    "inflation": 2.1,
+    "income": 19000,
+    "food": 2800,
+    "transport": 3800,
+    "entertainment": 4800,
+    "clothing": 5800
+  },
+  {
+    "year": 2018,
+    "inflation": 1.9,
+    "income": 19500,
+    "food": 2900,
+    "transport": 3900,
+    "entertainment": 4900,
+    "clothing": 5900
+  },
+  {
+    "year": 2019,
+    "inflation": 2.3,
+    "income": 20000,
+    "food": 3000,
+    "transport": 4000,
+    "entertainment": 5000,
+    "clothing": 6000
+  },
+  {
+    "year": 2020,
+    "inflation": 1.4,
+    "income": 20500,
+    "food": 3100,
+    "transport": 4100,
+    "entertainment": 5100,
+    "clothing": 6100
+  },
+  {
+    "year": 2021,
+    "inflation": 2.5,
+    "income": 21000,
+    "food": 3200,
+    "transport": 4200,
+    "entertainment": 5200,
+    "clothing": 6200
+  }
+]
